@@ -14,5 +14,18 @@ const db = {};
 
 db.Sequelize = Sequelize;
 db.sequelize = sequelize;
+db.customer = require('./customer')(sequelize, Sequelize);
+db.business = require('./business')(sequelize, Sequelize);
+db.appointment = require('./appointment')(sequelize, Sequelize);
+
+db.customer.hasMany(db.appointment, {as:"appointment"});
+db.business.hasMany(db.appointment, {as:"appointment"});
+
+db.appointment.belongsTo(db.customer, {
+    as: "customer"
+});
+db.appointment.belongsTo(db.business, {
+    as: "business"
+});
 
 module.exports = db;
