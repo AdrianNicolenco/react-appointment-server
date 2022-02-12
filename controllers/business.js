@@ -10,11 +10,11 @@ exports.signup = async (req, res) => {
   if (!(email && password && name && location)) {
     res.status(400).send("All input is required");
   }
-  const oldbusiness = await Business.findOne({
+  const oldBusiness = await Business.findOne({
     email,
   });
 
-  if (oldbusiness) {
+  if (oldBusiness) {
     return res.status(409).send("User Already Exist. Please Login");
   }
   bcrypt.genSalt().then((value) => {
