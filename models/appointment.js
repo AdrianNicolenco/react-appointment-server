@@ -20,9 +20,11 @@ module.exports = (sequelize, Sequelize) => {
       },
       status: {
         type: Sequelize.INTEGER,
+        default: 0
       },
       isRead: {
         type: Sequelize.BOOLEAN,
+        default: false
       },
     },
     {
