@@ -1,3 +1,5 @@
+/* ----- Define Business Model ------*/
+
 module.exports = (sequelize, Sequelize) => {
     const business = sequelize.define(
       "business",

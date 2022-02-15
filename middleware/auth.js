@@ -2,8 +2,8 @@ const jwt = require("jsonwebtoken");
 
 const verifyToken = (req, res, next) => {
   const token =
-    req.body.token || req.query.token || req.headers["x-access-token"];
-
+    req.body.token || req.query.token || req.headers["authorization"];
+  console.log(req.headers)
   // If there is any token, throw 403 error
   if (!token) {
     return res.status(403).send("A token is required for authentication");
@@ -11,7 +11,7 @@ const verifyToken = (req, res, next) => {
   try {
   // Verify Token & get information
     const decoded = jwt.verify(token, process.env.TOKEN_KEY);
-    req.user = decoded;
+    req.userInfo = decoded;
   }
   // If the token is Invalid, throw 401 error
   catch (err) {

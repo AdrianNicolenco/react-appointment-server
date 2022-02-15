@@ -24,7 +24,7 @@ db.sequelize.sync();
 
 require('./routes/customer')(app);
 require('./routes/business')(app);
-// require('./routes/appointment')(app);
+require('./routes/appointment')(app);
 
 /* ----- Run the Server ----- */
 

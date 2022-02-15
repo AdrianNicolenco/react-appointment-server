@@ -3,28 +3,27 @@ module.exports = (sequelize, Sequelize) => {
     "appointment",
     {
       starttime: {
-        type: Sequelize.STRING,
+        type: Sequelize.DATE,
       },
       endtime: {
-        type: Sequelize.STRING,
+        type: Sequelize.DATE,
       },
       location: {
         type: Sequelize.STRING,
         allowNull:true
-      },
-      message: {
-        type: Sequelize.STRING,
       },
       title: {
         type: Sequelize.STRING,
       },
       status: {
         type: Sequelize.INTEGER,
-        default: 0
+        allowNull:false,
+        defaultValue: 0
       },
       isRead: {
         type: Sequelize.BOOLEAN,
-        default: false
+        allowNull:false,
+        defaultValue: false
       },
     },
     {

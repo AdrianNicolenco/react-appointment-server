@@ -1,3 +1,5 @@
+/* ------ Define Customer Model ------ */
+
 module.exports = (sequelize, Sequelize) => {
   const customer = sequelize.define(
     "customer",
