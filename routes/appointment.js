@@ -11,9 +11,11 @@ module.exports = (app) => {
 
     router.delete("/:id", auth, appointment.delete);
     
-    router.post("/:id", auth, appointment.change);
+    router.post("/:id", appointment.change);
 
-    router.put("/:id", auth, appointment.remove);
+    router.put("/:id", appointment.remove);
+
+    router.get("/all", appointment.getAll);
 
     app.use('/appointment', router)
 }

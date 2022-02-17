@@ -67,7 +67,7 @@ exports.login = async (req, res) => {
         { user_id: business.id, email },
         process.env.TOKEN_KEY,
         {
-          expiresIn: "15m",
+          expiresIn: "2h",
         }
       );
       business.token = token;
@@ -91,7 +91,6 @@ exports.findAppointmentById = (appointmentId) => {
 };
 
 exports.find = async (req, res) => {
-  console.log("SDF");
   Business.findAll().then((business) => {res.status(200).json(business)});
 }
 

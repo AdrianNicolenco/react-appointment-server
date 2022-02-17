@@ -17,14 +17,15 @@ exports.signup = async (req, res) => {
 
   if (!(email && password && name && location)) {
     res.status(400).send("All input is required");
+    return;
   }
   
   const oldCustomer = await Customer.findOne({
     where:{email},
   }); // Authorizer already existed
-  console.log(oldCustomer);
   if (oldCustomer) {
-    return res.status(409).send("User Already Exist. Please Login");
+    res.status(400).send("User Already Exist. Please Login");
+    return;
   }
 
   bcrypt.genSalt().then((value) => {
@@ -67,7 +68,7 @@ exports.login = async (req, res) => {
         { user_id: customer.id, email },
         process.env.TOKEN_KEY,
         {
-          expiresIn: "15m",
+          expiresIn: "2h",
         }
       );
       res.status(200).json({...customer, token: token});

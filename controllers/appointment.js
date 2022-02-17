@@ -16,8 +16,9 @@ const jwt = require("jsonwebtoken");
 
 exports.create = async (req, res) => {
     const { title, starttime, endtime, customerId, businessId, location } = req.body.object;
-    if (!(title && starttime && endtime && customerId, businessId)) {
+    if (!(title && starttime && endtime && customerId && businessId)) {
     	res.status(400).send("All input is required");
+        return;
   	}
         Appointment.create({
         title:title,
@@ -39,7 +40,8 @@ exports.create = async (req, res) => {
 /* ----- Define update Function ----- */
 
 exports.update = async (req, res) => {
-    const {id, title, starttime, endtime} = req.body.object;
+    console.log(req);
+    const {id, title, starttime, endtime, location} = req.body.object;
     const oldAppointment = await Appointment.findOne({ where: { id } });
     if(oldAppointment === null) {
         res.status(400).json({
@@ -51,6 +53,7 @@ exports.update = async (req, res) => {
             title: title,
             starttime: starttime,
             endtime: endtime,
+            location:location,
             status:0,
             isRead:0
         }, {
@@ -104,6 +107,7 @@ exports.delete = async (req, res) => {
 }
 
 exports.change = async (req, res) => {
+    console.log(req.params.id);
     const {id} = req.params;
     const oldAppointment = await Appointment.findOne({ where: { id } });
     if(oldAppointment === null) {
@@ -150,10 +154,13 @@ exports.remove = async (req, res) => {
             errorMessage: 'Delete Successfully'
         })
     } }catch(e) {
-        console.log(e);
         res.status(400).json({
             status: false,
             errorMessage: 'Something went wrong'
         })
     }
+}
+
+exports.getAll = async(req, res) => {
+    Appointment.findAll().then((business) => {res.status(200).json(business)});
 }
